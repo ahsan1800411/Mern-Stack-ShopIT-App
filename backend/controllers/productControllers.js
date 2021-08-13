@@ -1,5 +1,5 @@
 const Product = require("../models/product");
-// create a new product ==> /api/v1/product/new == post request
+// create a new product ==> /api/v1/admin/product/new == post request
 
 exports.newProduct = async (req, res, next) => {
   const product = await Product.create(req.body);
@@ -28,6 +28,26 @@ exports.getSingleProduct = async (req, res, next) => {
       success: false,
       message: "Product not found",
     });
+  res.status(200).json({
+    success: true,
+
+    product,
+  });
+};
+
+// update a  product ==> /api/v1/admin/product/:id == put request
+exports.updateProduct = async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+  if (!product)
+    return res.status(404).json({
+      success: false,
+      message: "Product not found",
+    });
+  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
   res.status(200).json({
     success: true,
 
