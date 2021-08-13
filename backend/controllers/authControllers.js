@@ -2,6 +2,7 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const User = require("../models/user");
 const ErrorHandler = require("../utils/errorHandler");
 const bcrypt = require("bcryptjs");
+const sendToken = require("../utils/jwtToken");
 // register A NEW user ==> /api/v1/register ==> post request
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -15,11 +16,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: "https://unsplash.com",
     },
   });
-  const token = user.getJwtToken();
-  res.status(201).json({
-    success: true,
-    token,
-  });
+  sendToken(user, 201, res);
 });
 
 // login a user ==> /api/v1/login ==> post request
@@ -36,9 +33,5 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid Email or password", 400));
   }
-  const token = user.getJwtToken();
-  res.status(201).json({
-    success: true,
-    token,
-  });
+  sendToken(user, 201, res);
 });
