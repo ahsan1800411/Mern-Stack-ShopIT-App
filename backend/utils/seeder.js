@@ -18,4 +18,4 @@ const seedProducts = async () => {
   }
 };
 
-seeProducts();
+seedProducts();
