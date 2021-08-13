@@ -11,8 +11,11 @@ exports.newProduct = async (req, res, next) => {
 };
 
 // get all the products ==> /api/v1/products --> get request
-exports.getProducts = (req, res, next) => {
+exports.getProducts = async (req, res, next) => {
+  const products = await Product.find();
   res.json({
-    message: "All the Products",
+    success: true,
+    count: products.length,
+    products,
   });
 };
