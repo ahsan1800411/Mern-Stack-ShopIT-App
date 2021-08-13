@@ -69,7 +69,7 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
   reviews: [
-   
+    {
       name: {
         type: String,
         required: true,
@@ -84,7 +84,7 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
- 
+
   createdAt: {
     type: Date,
     default: Date.now,
