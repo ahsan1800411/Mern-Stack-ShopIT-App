@@ -13,7 +13,7 @@ exports.newProduct = async (req, res, next) => {
 // get all the products ==> /api/v1/products --> get request
 exports.getProducts = async (req, res, next) => {
   const products = await Product.find();
-  res.json({
+  res.status(200).json({
     success: true,
     count: products.length,
     products,
