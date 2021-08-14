@@ -114,6 +114,19 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// update password ==> /api/v1/password/update ==> put request
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+  // match the previous password with the new one
+  const isMatched = await bcrypt.compare(req.body.oldPassword, user.password);
+  if (!isMatched) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
+  user.password = req.body.password;
+  await user.save();
+  sendToken(user, 201, res);
+});
+
 // logout user ==> /api/v1/logout ==> get request
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
   res.cookie("token", null, {
