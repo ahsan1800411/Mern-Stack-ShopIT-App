@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div classNameName='container container-fluid'>
+    <>
       <h1 id='products_heading'>Latest Products</h1>
       <section id='products' className='container mt-5'>
         <div className='row'>
@@ -31,7 +31,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
