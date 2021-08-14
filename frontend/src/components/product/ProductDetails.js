@@ -4,6 +4,7 @@ import { clearErrors, getProductDetails } from "../../actions/productActions";
 import { useAlert } from "react-alert";
 import Loader from "../layout/Loader";
 import { Carousel } from "react-bootstrap";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
   const alert = useAlert();
@@ -26,6 +27,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <>
+          <MetaData title={product.name} />
           <div className='row f-flex justify-content-around'>
             <div className='col-12 col-lg-5 img-fluid' id='product_image'>
               <Carousel pause='hover'>
