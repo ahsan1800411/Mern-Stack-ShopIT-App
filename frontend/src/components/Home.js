@@ -7,7 +7,7 @@ import Loader from "./layout/Loader";
 import { useAlert } from "react-alert";
 import Pagination from "react-js-pagination";
 
-const Home = () => {
+const Home = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const alert = useAlert();
@@ -15,13 +15,14 @@ const Home = () => {
   const { loading, error, products, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
+  const keyword = match.params.keyword;
 
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProducts(currentPage));
-  }, [dispatch, error, currentPage]);
+    dispatch(getProducts(keyword, currentPage));
+  }, [dispatch, error, keyword, currentPage]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
