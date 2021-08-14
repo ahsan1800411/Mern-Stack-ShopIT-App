@@ -127,6 +127,22 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 201, res);
 });
 
+//update user profile ==> /api/v1/me/update ==> put request
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    email: req.body.email,
+    name: req.body.name,
+  };
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  res.status(200).json({
+    success: true,
+  });
+});
+
 // logout user ==> /api/v1/logout ==> get request
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
   res.cookie("token", null, {
@@ -136,5 +152,15 @@ exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Logged Out Successfully",
+  });
+});
+
+// Admin Routes ----------------------------------------------------------------
+//  get all the users ==> /api/v1/admin/users ==> get request
+exports.allUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+    success: true,
+    users,
   });
 });
