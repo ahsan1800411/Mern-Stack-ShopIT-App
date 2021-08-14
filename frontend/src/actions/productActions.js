@@ -8,11 +8,19 @@ import {
 
 export const getProducts = () => async (dispatch) => {
   try {
-    dispatch({ type: ALL_PRODUCTS_REQUEST });
+    dispatch({
+      type: ALL_PRODUCTS_REQUEST,
+    });
     const { data } = await axios("/api/v1/products");
-    dispatch({ type: ALL_PRODUCTS_SUCCESS, payload: data });
+    dispatch({
+      type: ALL_PRODUCTS_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
-    dispatch({ type: ALL_PRODUCTS_FAIL, payload: error.data.response.message });
+    dispatch({
+      type: ALL_PRODUCTS_FAIL,
+      error: error.response.data.message,
+    });
   }
 };
 
