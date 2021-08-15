@@ -614,3 +614,7 @@ ul.CTAs a {
   font-size: 0.8rem;
   color: grey;
 }
+.category-li {
+  list-style-type: none;
+  cursor: pointer;
+}
