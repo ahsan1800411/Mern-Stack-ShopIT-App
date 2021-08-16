@@ -4,11 +4,17 @@ import { Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import Search from "./Search";
+import { logoutUser } from "../../actions/userActions";
 
 const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, user } = useSelector((state) => state.auth);
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+    alert.success("Logout Successfully");
+  };
   return (
     <Fragment>
       <nav className='navbar row'>
@@ -58,18 +64,24 @@ const Header = () => {
                 className='dropdown-menu'
                 aria-labelledby='dropDownMenuButton'
               >
-                {user && user.role === "admin" && (
+                {user && user.role !== "admin" ? (
+                  <Link className='dropdown-item' to='/orders/me'>
+                    Orders
+                  </Link>
+                ) : (
                   <Link className='dropdown-item' to='/dashboard'>
                     Dashboard
                   </Link>
                 )}
-                <Link className='dropdown-item' to='/orders/me'>
-                  Orders
-                </Link>
+
                 <Link className='dropdown-item' to='/me'>
                   Profile
                 </Link>
-                <Link className='dropdown-item text-danger' to='/'>
+                <Link
+                  className='dropdown-item text-danger'
+                  to='/'
+                  onClick={logoutHandler}
+                >
                   Logout
                 </Link>
               </div>
