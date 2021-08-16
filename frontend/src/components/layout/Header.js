@@ -69,11 +69,7 @@ const Header = () => {
                 <Link className='dropdown-item' to='/me'>
                   Profile
                 </Link>
-                <Link
-                  className='dropdown-item text-danger'
-                  to='/'
-                  onClick={logoutHandler}
-                >
+                <Link className='dropdown-item text-danger' to='/'>
                   Logout
                 </Link>
               </div>
