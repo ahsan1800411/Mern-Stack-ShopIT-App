@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/layout/Header";
@@ -6,8 +7,13 @@ import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
 import Resgister from "./components/user/Resgister";
+import store from "./store";
+import { loadUser } from "./actions/userActions";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
     <BrowserRouter>
       <div className='App'>
