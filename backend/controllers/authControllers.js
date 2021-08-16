@@ -5,18 +5,25 @@ const bcrypt = require("bcryptjs");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 // register A NEW user ==> /api/v1/register ==> post request
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { name, email, password } = req.body;
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "Ahsan",
-      url: "https://unsplash.com",
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   });
   sendToken(user, 201, res);
