@@ -50,7 +50,7 @@ const Home = ({ match }) => {
       return alert.error(error);
     }
     dispatch(getProducts(keyword, currentPage, price, category, rating));
-  }, [dispatch, error, keyword, currentPage, price, category, rating]);
+  }, [dispatch, error, alert, keyword, currentPage, price, category, rating]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
