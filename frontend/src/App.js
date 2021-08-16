@@ -5,6 +5,7 @@ import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
+import Resgister from "./components/user/Resgister";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/search/:keyword' component={Home} />
           <Route path='/product/:id' exact component={ProductDetails} />
           <Route path='/login' component={Login} />
+          <Route path='/register' component={Resgister} />
         </div>
 
         <Footer />
