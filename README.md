@@ -3,9 +3,9 @@ E-commerce Project::
 Complete E-commerce site built with Node.js, React, Redux, Express, MongoDB
 
 
-Env Variables::
+# Env Variables::
 
-Add a config.env file to backend/config folder and then add the following variables in these files:
+# Add a config.env file to backend/config folder and then add the following variables in these files:
 
 PORT = 
 
@@ -43,17 +43,17 @@ STRIPE_SECRET_KEY =
 
 STRIPE_API_KEY = 
 
-Install Dependencies (Frontend)::
+# Install Dependencies (Frontend)::
 
 cd frontend
 
 npm i
 
-Install Dependencies (Backend)::
+# Install Dependencies (Backend)::
 
 npm i
 
-Seed Database:
+# Seed Database:
 
 Use the following commeand to put some dummy products in that database. Run this in the root folder.
 
